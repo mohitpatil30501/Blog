@@ -3,7 +3,7 @@ import json
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 
-from blog.models import Blog, Post
+from blog.models import Blog, Post, PostComment
 
 
 def blog(request):
@@ -80,6 +80,40 @@ def get_all_post(request):
             "body_text": post.body_text,
             "created_at": post.created_at,
             "modifies_at": post.modifies_at
+        })
+
+    return JsonResponse({"message": "api success", "data": response})
+
+
+def post_comment(request):
+    params = json.loads(request.body)
+    post_id = params.get('post_id')
+    user_id = params.get('user_id')
+    comment = params.get('comment')
+    response = []
+    PostComment.objects.create(
+        post=Post.objects.get(id=post_id),
+        user=User.objects.get(id=user_id),
+        comment=comment
+    )
+    return JsonResponse({"message": "api success", "data": response})
+
+
+def get_post_comment(request):
+    params = json.loads(request.body)
+    post_id = params.get('post_id')
+
+    response = []
+    queryset = PostComment.objects.filter(post__id=post_id)
+    for comment in queryset:
+        response.append({
+            "post_id": comment.post.id,
+            "blog_name": comment.post.blog.name,
+            "post_headline": comment.post.headline,
+            "username": comment.user.username,
+            "comment": comment.comment,
+            "created_at": comment.created_at,
+            "modifies_at": comment.modifies_at
         })
 
     return JsonResponse({"message": "api success", "data": response})

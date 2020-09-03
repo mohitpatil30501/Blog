@@ -7,4 +7,6 @@ urlpatterns = [
     path('blog/', blog),
     path('post/', post),
     path('get_all_post/', get_all_post),
+    path('post_comment/', post_comment),
+    path('get_post_comment/', get_post_comment),
 ]
