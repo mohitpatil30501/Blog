@@ -1,0 +1,200 @@
+Index: blog/admin.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from django.contrib import admin\r\nfrom blog.models import *\r\n\r\n\r\nclass PostAdmin(admin.ModelAdmin):\r\n    pass\r\n\r\nclass PostCommentAdmin(admin.ModelAdmin):\r\n    pass\r\n\r\n\r\nadmin.site.register(Post, PostAdmin)\r\nadmin.site.register(PostComment, PostCommentAdmin)\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- blog/admin.py	(revision b6bbd601c95023cdcbbbe20e8fbec6d546cd09bb)
++++ blog/admin.py	(date 1599273430727)
+@@ -2,13 +2,21 @@
+ from blog.models import *
+ 
+ 
++class BlogAdmin(admin.ModelAdmin):
++    pass
++
++
+ class PostAdmin(admin.ModelAdmin):
+     pass
+ 
++
+ class PostCommentAdmin(admin.ModelAdmin):
+     pass
+ 
+ 
++admin.site.register(Blog, BlogAdmin)
+ admin.site.register(Post, PostAdmin)
+ admin.site.register(PostComment, PostCommentAdmin)
++admin.site.register(LikePost)
++admin.site.register(LikeComment)
+ 
+Index: blog/urls.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from django.contrib import admin\r\nfrom django.urls import path\r\nfrom .views import *\r\n\r\nurlpatterns = [\r\n    path('admin/', admin.site.urls),\r\n    path('blog/', blog),\r\n    path('post/', post),\r\n    path('get_all_post/', get_all_post),\r\n    path('post_comment/', post_comment),\r\n    path('get_post_comment/', get_post_comment),\r\n]\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- blog/urls.py	(revision b6bbd601c95023cdcbbbe20e8fbec6d546cd09bb)
++++ blog/urls.py	(date 1599272185346)
+@@ -9,4 +9,6 @@
+     path('get_all_post/', get_all_post),
+     path('post_comment/', post_comment),
+     path('get_post_comment/', get_post_comment),
++    path('like_post/', like_post),
++    path('like_comment/', like_comment),
+ ]
+Index: blog/models.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from django.contrib.auth.models import User\r\nfrom django.db import models\r\n\r\n\r\nclass Blog(models.Model):\r\n    name = models.CharField(max_length=50)\r\n    tag = models.CharField(max_length=30)\r\n\r\n\r\nclass Post(models.Model):\r\n    author = models.ForeignKey(User, on_delete=models.DO_NOTHING)\r\n    blog = models.ForeignKey(Blog, on_delete=models.DO_NOTHING)\r\n    headline = models.CharField(max_length=200)\r\n    body_text = models.TextField()\r\n    created_at = models.DateTimeField(auto_now_add=True)\r\n    modifies_at = models.DateTimeField(auto_now=True)\r\n\r\n\r\nclass PostComment(models.Model):\r\n    post = models.ForeignKey(Post, on_delete=models.CASCADE)\r\n    user = models.ForeignKey(User, on_delete=models.CASCADE)\r\n    comment = models.TextField()\r\n    created_at = models.DateTimeField(auto_now_add=True)\r\n    modifies_at = models.DateTimeField(auto_now=True)\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- blog/models.py	(revision b6bbd601c95023cdcbbbe20e8fbec6d546cd09bb)
++++ blog/models.py	(date 1599271805854)
+@@ -24,3 +24,13 @@
+     modifies_at = models.DateTimeField(auto_now=True)
+ 
+ 
++class LikePost(models.Model):
++    user = models.ForeignKey(User, on_delete=models.CASCADE)
++    post = models.ForeignKey(Post, on_delete=models.CASCADE)
++    is_like = models.BooleanField(default=False)
++
++
++class LikeComment(models.Model):
++    user = models.ForeignKey(User, on_delete=models.CASCADE)
++    comment = models.ForeignKey(PostComment, on_delete=models.CASCADE)
++    is_like = models.BooleanField(default=False)
+Index: blog/views.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import json\r\n\r\nfrom django.contrib.auth.models import User\r\nfrom django.http import JsonResponse\r\n\r\nfrom blog.models import Blog, Post, PostComment\r\n\r\n\r\ndef blog(request):\r\n    \"\"\"\r\n\r\n    :param request:\r\n            name: str\r\n            tag: str\r\n    :return:\r\n        JsonResponse:\r\n        success/ fail\r\n    \"\"\"\r\n    response = []\r\n    if request.method == \"POST\":\r\n        params = json.loads(request.body)\r\n        name = params.get('name')\r\n        tag = params.get('tag')\r\n\r\n        Blog.objects.create(name=name, tag=tag)\r\n\r\n    if request.method == \"GET\":\r\n        queryset = Blog.objects.all()\r\n        for _blog in queryset:\r\n            response.append({\r\n                \"id\": _blog.id,\r\n                \"name\": _blog.name,\r\n                \"tag\": _blog.tag,\r\n            })\r\n\r\n    return JsonResponse({\"message\": \"api success\", \"data\": response})\r\n\r\n\r\ndef post(request):\r\n    \"\"\"\r\n\r\n    :param request:\r\n            author : user_id\r\n            blog : blog_id\r\n            headline : str\r\n            body_text : str\r\n\r\n    :return:\r\n        success / fail\r\n    \"\"\"\r\n\r\n    response = []\r\n\r\n    params = json.loads(request.body)\r\n    author_id = params.get('author_id')\r\n    blog_id = params.get('blog_id')\r\n    headline = params.get('headline')\r\n    body_text = params.get('body_text')\r\n\r\n    author = User.objects.get(id=author_id)\r\n    blog = Blog.objects.get(id=blog_id)\r\n\r\n    Post.objects.create(author=author, blog=blog,\r\n                        headline=headline, body_text=body_text)\r\n\r\n    return JsonResponse({\"message\": \"api success\", \"data\": response})\r\n\r\n\r\ndef get_all_post(request):\r\n    queryset = Post.objects.all()\r\n    response = []\r\n    for post in queryset:\r\n        response.append({\r\n            \"id\": post.id,\r\n            \"author_id\": post.author.id,\r\n            \"author_username\": post.author.username,\r\n            \"blog_id\": post.blog.id,\r\n            \"blog_name\": post.blog.name,\r\n            \"headline\": post.headline,\r\n            \"body_text\": post.body_text,\r\n            \"created_at\": post.created_at,\r\n            \"modifies_at\": post.modifies_at\r\n        })\r\n\r\n    return JsonResponse({\"message\": \"api success\", \"data\": response})\r\n\r\n\r\ndef post_comment(request):\r\n    params = json.loads(request.body)\r\n    post_id = params.get('post_id')\r\n    user_id = params.get('user_id')\r\n    comment = params.get('comment')\r\n    response = []\r\n    PostComment.objects.create(\r\n        post=Post.objects.get(id=post_id),\r\n        user=User.objects.get(id=user_id),\r\n        comment=comment\r\n    )\r\n    return JsonResponse({\"message\": \"api success\", \"data\": response})\r\n\r\n\r\ndef get_post_comment(request):\r\n    params = json.loads(request.body)\r\n    post_id = params.get('post_id')\r\n\r\n    response = []\r\n    queryset = PostComment.objects.filter(post__id=post_id)\r\n    for comment in queryset:\r\n        response.append({\r\n            \"post_id\": comment.post.id,\r\n            \"blog_name\": comment.post.blog.name,\r\n            \"post_headline\": comment.post.headline,\r\n            \"username\": comment.user.username,\r\n            \"comment\": comment.comment,\r\n            \"created_at\": comment.created_at,\r\n            \"modifies_at\": comment.modifies_at\r\n        })\r\n\r\n    return JsonResponse({\"message\": \"api success\", \"data\": response})
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- blog/views.py	(revision b6bbd601c95023cdcbbbe20e8fbec6d546cd09bb)
++++ blog/views.py	(date 1599273966512)
+@@ -3,7 +3,7 @@
+ from django.contrib.auth.models import User
+ from django.http import JsonResponse
+ 
+-from blog.models import Blog, Post, PostComment
++from blog.models import *
+ 
+ 
+ def blog(request):
+@@ -70,6 +70,7 @@
+     queryset = Post.objects.all()
+     response = []
+     for post in queryset:
++        total_likes = LikePost.objects.filter(post=post, is_like=True).count()
+         response.append({
+             "id": post.id,
+             "author_id": post.author.id,
+@@ -78,8 +79,9 @@
+             "blog_name": post.blog.name,
+             "headline": post.headline,
+             "body_text": post.body_text,
++            "total_likes": total_likes,
+             "created_at": post.created_at,
+-            "modifies_at": post.modifies_at
++            "modifies_at": post.modifies_at,
+         })
+ 
+     return JsonResponse({"message": "api success", "data": response})
+@@ -106,14 +108,57 @@
+     response = []
+     queryset = PostComment.objects.filter(post__id=post_id)
+     for comment in queryset:
++        total_likes = LikeComment.objects.filter(comment=comment, is_like=True).count()
+         response.append({
+             "post_id": comment.post.id,
+             "blog_name": comment.post.blog.name,
+             "post_headline": comment.post.headline,
+             "username": comment.user.username,
+             "comment": comment.comment,
++            "total_likes": total_likes,
+             "created_at": comment.created_at,
+             "modifies_at": comment.modifies_at
+         })
+ 
+-    return JsonResponse({"message": "api success", "data": response})
+\ No newline at end of file
++    return JsonResponse({"message": "api success", "data": response})
++
++
++def like_post(request):
++    params = json.loads(request.body)
++    post_id = params.get('post_id')
++    user_id = params.get('user_id')
++    is_like = params.get('is_like')
++
++    response = []
++    if LikePost.objects.filter(post__id=post_id, user__id=user_id).exists():
++        like = LikePost.objects.get(post__id=post_id, user__id=user_id)
++        like.is_like = is_like
++        like.save()
++    else:
++        LikePost.objects.create(
++            post=Post.objects.get(id=post_id),
++            user=User.objects.get(id=user_id),
++            is_like=is_like
++        )
++    return JsonResponse({"message": "api success", "data": response})
++
++
++def like_comment(request):
++    params = json.loads(request.body)
++    comment_id = params.get('comment_id')
++    user_id = params.get('user_id')
++    is_like = params.get('is_like')
++    response = []
++    if LikeComment.objects.filter(comment_id=comment_id, user__id=user_id).exists():
++        like = LikeComment.objects.get(comment_id=comment_id, user__id=user_id)
++        like.is_like = is_like
++        like.save()
++    else:
++        LikeComment.objects.create(
++            comment=PostComment.objects.get(id=comment_id),
++            user=User.objects.get(id=user_id),
++            is_like=is_like
++        )
++    return JsonResponse({"message": "api success", "data": response})
++
++
+Index: requirements.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>asgiref==3.2.10\r\nDjango==3.1\r\npkg-resources==0.0.0\r\npytz==2020.1\r\nsqlparse==0.3.1\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- requirements.txt	(revision b6bbd601c95023cdcbbbe20e8fbec6d546cd09bb)
++++ requirements.txt	(date 1598855216743)
+@@ -1,5 +1,5 @@
+ asgiref==3.2.10
+ Django==3.1
+-pkg-resources==0.0.0
++pkg-resources
+ pytz==2020.1
+ sqlparse==0.3.1
+Index: .gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>db.sqlite3\r\nblog/__pycache__/\r\n *.pyc
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .gitignore	(revision b6bbd601c95023cdcbbbe20e8fbec6d546cd09bb)
++++ .gitignore	(date 1598625710218)
+@@ -1,3 +1,4 @@
+ db.sqlite3
+ blog/__pycache__/
+- *.pyc
+\ No newline at end of file
++*.pyc
++.idea/
+\ No newline at end of file
