@@ -9,4 +9,6 @@ urlpatterns = [
     path('get_all_post/', get_all_post),
     path('post_comment/', post_comment),
     path('get_post_comment/', get_post_comment),
+    path('like_post/', like_post),
+    path('like_comment/', like_comment),
 ]

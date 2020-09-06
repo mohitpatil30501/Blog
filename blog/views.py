@@ -3,7 +3,7 @@ import json
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 
-from blog.models import Blog, Post, PostComment
+from blog.models import *
 
 
 def blog(request):
@@ -70,6 +70,7 @@ def get_all_post(request):
     queryset = Post.objects.all()
     response = []
     for post in queryset:
+        total_like = LikePost.objects.filter(post=post, is_like=True).count()
         response.append({
             "id": post.id,
             "author_id": post.author.id,
@@ -78,6 +79,7 @@ def get_all_post(request):
             "blog_name": post.blog.name,
             "headline": post.headline,
             "body_text": post.body_text,
+            "total_like": total_like,
             "created_at": post.created_at,
             "modifies_at": post.modifies_at
         })
@@ -106,14 +108,54 @@ def get_post_comment(request):
     response = []
     queryset = PostComment.objects.filter(post__id=post_id)
     for comment in queryset:
+        total_like = LikeComment.objects.filter(comment=comment, is_like=True).count()
         response.append({
             "post_id": comment.post.id,
             "blog_name": comment.post.blog.name,
             "post_headline": comment.post.headline,
             "username": comment.user.username,
             "comment": comment.comment,
+            "total_like": total_like,
             "created_at": comment.created_at,
             "modifies_at": comment.modifies_at
         })
 
     return JsonResponse({"message": "api success", "data": response})
+
+
+def like_post(request):
+    params = json.loads(request.body)
+    post_id = params.get('post_id')
+    user_id = params.get('user_id')
+    is_like = params.get('is_like')
+
+    if LikePost.objects.filter(post__id=post_id, user__id=user_id).exists():
+        like = LikePost.objects.get(post__id=post_id, user__id=user_id)
+        like.is_like = is_like
+        like.save()
+    else:
+        LikePost.objects.create(
+            post=Post.objects.get(id=post_id),
+            user=User.objects.get(id=user_id),
+            is_like=is_like
+        )
+    return JsonResponse({"message": "api success"})
+
+
+def like_comment(request):
+    params = json.loads(request.body)
+    comment_id = params.get('comment_id')
+    user_id = params.get('user_id')
+    is_like = params.get('is_like')
+
+    if LikeComment.objects.filter(comment__id=comment_id, user__id=user_id).exists():
+        like = LikeComment.objects.get(comment__id=comment_id, user__id=user_id)
+        like.is_like = is_like
+        like.save()
+    else:
+        LikeComment.objects.create(
+            comment=PostComment.objects.get(id=comment_id),
+            user=User.objects.get(id=user_id),
+            is_like=is_like
+        )
+    return JsonResponse({"message": "api success"})

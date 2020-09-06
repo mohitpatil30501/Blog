@@ -24,3 +24,13 @@ class PostComment(models.Model):
     modifies_at = models.DateTimeField(auto_now=True)
 
 
+class LikePost(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    is_like = models.BooleanField(default=False)
+
+
+class LikeComment(models.Model):
+    comment = models.ForeignKey(PostComment, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    is_like = models.BooleanField(default=False)

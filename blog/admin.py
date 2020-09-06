@@ -5,10 +5,12 @@ from blog.models import *
 class PostAdmin(admin.ModelAdmin):
     pass
 
+
 class PostCommentAdmin(admin.ModelAdmin):
     pass
 
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(PostComment, PostCommentAdmin)
-
+admin.site.register(LikePost)
+admin.site.register(LikeComment)
