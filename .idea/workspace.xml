@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -10,11 +13,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1563f27-7267-487e-86c7-28ecc972654d" name="Default Changelist" comment="Like feature added Initial feature">
+    <list default="true" id="e1563f27-7267-487e-86c7-28ecc972654d" name="Default Changelist" comment="SubComment Model added">
       <changelist_data name="Mohit Patil" email="" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blog/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +66,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Like feature added Initial feature" />
-    <option name="LAST_COMMIT_MESSAGE" value="Like feature added Initial feature" />
+    <MESSAGE value="SubComment Model added" />
+    <option name="LAST_COMMIT_MESSAGE" value="SubComment Model added" />
   </component>
   <component name="WindowStateProjectService">
     <state x="421" y="83" key="FileChooserDialogImpl" timestamp="1598632166077">
@@ -83,9 +86,9 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="550" y="238" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1280.680/0.1080.1920.515@0.0.1280.680" timestamp="1599370594612" />
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1599271593291">
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1599444161367">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680/0.1080.1920.515@0.0.1280.680" timestamp="1599271593291" />
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680/0.1080.1920.515@0.0.1280.680" timestamp="1599444161367" />
   </component>
 </project>
