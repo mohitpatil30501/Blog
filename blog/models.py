@@ -24,6 +24,14 @@ class PostComment(models.Model):
     modifies_at = models.DateTimeField(auto_now=True)
 
 
+class SubComment(models.Model):
+    comment = models.ForeignKey(PostComment, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    sub_comment = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    modifies_at = models.DateTimeField(auto_now=True)
+
+
 class LikePost(models.Model):
     post = models.ForeignKey(Post, on_delete=models.DO_NOTHING)
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)

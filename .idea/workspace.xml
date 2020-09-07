@@ -10,13 +10,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1563f27-7267-487e-86c7-28ecc972654d" name="Default Changelist" comment="Initial Commit">
+    <list default="true" id="e1563f27-7267-487e-86c7-28ecc972654d" name="Default Changelist" comment="Like feature added Initial feature">
       <changelist_data name="Mohit Patil" email="" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blog/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blog/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +35,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
@@ -63,23 +62,27 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Like feature added Initial feature" />
+    <option name="LAST_COMMIT_MESSAGE" value="Like feature added Initial feature" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="421" y="83" key="FileChooserDialogImpl" timestamp="1598632166077">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="421" y="83" key="FileChooserDialogImpl/0.0.1280.680/0.1080.1920.515@0.0.1280.680" timestamp="1598632166077" />
-    <state x="233" y="74" key="Vcs.Push.Dialog.v2" timestamp="1598626207756">
+    <state x="233" y="74" key="Vcs.Push.Dialog.v2" timestamp="1599370809798">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="233" y="74" key="Vcs.Push.Dialog.v2/0.0.1280.680/0.1080.1920.515@0.0.1280.680" timestamp="1598626207756" />
+    <state x="233" y="74" key="Vcs.Push.Dialog.v2/0.0.1280.680/0.1080.1920.515@0.0.1280.680" timestamp="1599370809798" />
     <state x="458" y="255" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1599367928174">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="458" y="255" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680/0.1080.1920.515@0.0.1280.680" timestamp="1599367928174" />
-    <state x="763" y="247" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1598625389785">
+    <state x="550" y="238" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1599370594612">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="763" y="247" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1280.680/0.1080.1920.515@0.0.1280.680" timestamp="1598625389785" />
+    <state x="550" y="238" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1280.680/0.1080.1920.515@0.0.1280.680" timestamp="1599370594612" />
     <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1599271593291">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
