@@ -12,6 +12,6 @@ class PostCommentAdmin(admin.ModelAdmin):
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(PostComment, PostCommentAdmin)
-admin.site.register(SubComment, SubCommentAdmin)
+admin.site.register(SubComment)
 admin.site.register(LikePost)
 admin.site.register(LikeComment)
