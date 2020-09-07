@@ -13,9 +13,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1563f27-7267-487e-86c7-28ecc972654d" name="Default Changelist" comment="SubComment Model error removed in admin.py">
+    <list default="true" id="e1563f27-7267-487e-86c7-28ecc972654d" name="Default Changelist" comment="SubComment feature added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -58,7 +58,14 @@
       <option name="project" value="LOCAL" />
       <updated>1599446112278</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="SubComment feature added">
+      <created>1599448511411</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1599448511411</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -77,7 +84,8 @@
     <MESSAGE value="Like feature added Initial feature" />
     <MESSAGE value="SubComment Model added" />
     <MESSAGE value="SubComment Model error removed in admin.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="SubComment Model error removed in admin.py" />
+    <MESSAGE value="SubComment feature added" />
+    <option name="LAST_COMMIT_MESSAGE" value="SubComment feature added" />
   </component>
   <component name="WindowStateProjectService">
     <state x="380" y="165" key="#Notifications" timestamp="1599447605099">
@@ -88,10 +96,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="421" y="83" key="FileChooserDialogImpl/0.0.1280.680/0.1080.1920.515@0.0.1280.680" timestamp="1598632166077" />
-    <state x="233" y="74" key="Vcs.Push.Dialog.v2" timestamp="1599370809798">
+    <state x="233" y="74" key="Vcs.Push.Dialog.v2" timestamp="1599448517822">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="233" y="74" key="Vcs.Push.Dialog.v2/0.0.1280.680/0.1080.1920.515@0.0.1280.680" timestamp="1599370809798" />
+    <state x="233" y="74" key="Vcs.Push.Dialog.v2/0.0.1280.680/0.1080.1920.515@0.0.1280.680" timestamp="1599448517822" />
     <state x="458" y="255" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1599367928174">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

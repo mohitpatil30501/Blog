@@ -67,10 +67,36 @@ def post(request):
 
 
 def get_all_post(request):
-    queryset = Post.objects.all()
+    queryset_post = Post.objects.all()
     response = []
-    for post in queryset:
-        total_like = LikePost.objects.filter(post=post, is_like=True).count()
+
+    for post in queryset_post:
+        total_like_post = LikePost.objects.filter(post=post, is_like=True).count()
+
+        comments = []
+        queryset_comment = PostComment.objects.filter(post=post)
+        for comment in queryset_comment:
+            total_like_comment = LikeComment.objects.filter(comment=comment, is_like=True).count()
+
+            sub_comments = []
+            queryset_sub_comment = SubComment.objects.filter(comment=comment)
+            for sub_comment in queryset_sub_comment:
+                sub_comments.append({
+                    "username": sub_comment.created_by.username,
+                    "sub_comment": sub_comment.sub_comment,
+                    "created_at": sub_comment.created_at,
+                    "modifies_at": sub_comment.modifies_at
+                })
+
+            comments.append({
+                "username": comment.user.username,
+                "comment": comment.comment,
+                "total_like": total_like_comment,
+                "created_at": comment.created_at,
+                "modifies_at": comment.modifies_at,
+                "reply_comments": sub_comments
+            })
+
         response.append({
             "id": post.id,
             "author_id": post.author.id,
@@ -79,9 +105,10 @@ def get_all_post(request):
             "blog_name": post.blog.name,
             "headline": post.headline,
             "body_text": post.body_text,
-            "total_like": total_like,
+            "total_like": total_like_post,
             "created_at": post.created_at,
-            "modifies_at": post.modifies_at
+            "modifies_at": post.modifies_at,
+            "comments": comments
         })
 
     return JsonResponse({"message": "api success", "data": response})

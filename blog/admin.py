@@ -10,6 +10,7 @@ class PostCommentAdmin(admin.ModelAdmin):
     pass
 
 
+admin.site.register(Blog)
 admin.site.register(Post, PostAdmin)
 admin.site.register(PostComment, PostCommentAdmin)
 admin.site.register(SubComment)
