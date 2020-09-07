@@ -13,10 +13,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1563f27-7267-487e-86c7-28ecc972654d" name="Default Changelist" comment="SubComment Model added">
-      <changelist_data name="Mohit Patil" email="" />
+    <list default="true" id="e1563f27-7267-487e-86c7-28ecc972654d" name="Default Changelist" comment="SubComment Model error removed in admin.py">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +26,7 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
+        <option value="mohitpatil30501 &lt;mohitpatil30501@gmail.com&gt;" />
         <option value="Mohit Patil" />
       </list>
     </option>
@@ -50,6 +51,14 @@
       <option name="presentableId" value="Default" />
       <updated>1598625189365</updated>
     </task>
+    <task id="LOCAL-00001" summary="SubComment Model error removed in admin.py">
+      <created>1599446112278</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1599446112278</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -67,9 +76,14 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Like feature added Initial feature" />
     <MESSAGE value="SubComment Model added" />
-    <option name="LAST_COMMIT_MESSAGE" value="SubComment Model added" />
+    <MESSAGE value="SubComment Model error removed in admin.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="SubComment Model error removed in admin.py" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="380" y="165" key="#Notifications" timestamp="1599447605099">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="380" y="165" key="#Notifications/0.0.1280.680/0.1080.1920.515@0.0.1280.680" timestamp="1599447605099" />
     <state x="421" y="83" key="FileChooserDialogImpl" timestamp="1598632166077">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

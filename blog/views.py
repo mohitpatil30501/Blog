@@ -123,6 +123,20 @@ def get_post_comment(request):
     return JsonResponse({"message": "api success", "data": response})
 
 
+def sub_comment(request):
+    params = json.loads(request.body)
+    comment_id = params.get('comment_id')
+    created_by_id = params.get('created_by_id')
+    sub_comment = params.get('sub_comment')
+    response = []
+    SubComment.objects.create(
+        comment=PostComment.objects.get(id=comment_id),
+        created_by=User.objects.get(id=created_by_id),
+        sub_comment=sub_comment
+    )
+    return JsonResponse({"message": "api success", "data": response})
+
+
 def like_post(request):
     params = json.loads(request.body)
     post_id = params.get('post_id')
